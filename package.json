@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "pnpm run inject-env && tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "inject-env": "node inject-env.js",
+    "dev:netlify": "pnpm run build && netlify dev --dir=dist"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",
+    "dotenv": "^16.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
