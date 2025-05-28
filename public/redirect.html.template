@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       margin: 0;
@@ -35,12 +36,33 @@
       margin-top: 1.5rem;
       font-size: 1.2rem;
     }
+
+    button {
+      padding: 0.6em 1.5em;
+      margin-top: 2rem;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(79,70,229,0.08);
+      transition: background 0.18s, transform 0.12s;
+      display: none;
+    }
+    button:hover, button:focus {
+      background: #3730a3;
+      outline: none;
+      transform: translateY(-2px) scale(1.03);
+    }
   </style>
 </head>
 <body>
   <h1>Just a moment...</h1>
   <div class="spinner"></div>
   <p class="message">Redirecting you to the destination link.</p>
+
+  <button onclick="backToHome()">Back</button>
 
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
@@ -58,9 +80,14 @@
     if (data?.original_url) {
       window.location.replace(data.original_url);
     } else {
-      document.querySelector(".message").innerText = "⚠️ Link not found.\n\nPlease check your URL.";
+      document.querySelector(".message").innerText = "⚠️ Link not found\n\nPlease check your URL or entered code";
       document.querySelector("h1").style.display = "none";
       document.querySelector(".spinner").style.display = "none";
+      document.querySelector("button").style.display = "block";
+    }
+    
+    window.backToHome = function() {
+      window.location.href = '/'
     }
   </script>
 </body>
