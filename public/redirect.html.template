@@ -74,7 +74,8 @@
     const { data, error } = await supabase
       .from('links')
       .select('original_url')
-      .eq('short_code', code)
+      .ilike('short_code', code)
+      .eq('active', true)
       .single();
 
     if (data?.original_url) {
